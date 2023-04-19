@@ -1,23 +1,28 @@
 name: model-training
-on: [push]
+on:
+  pull_request:
+    branches: main
 permissions: write-all
 jobs:
   train_and_publish_report:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Train model
-        run: python train.py
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Run DVC pipeline
+        run: dvc repro
 
       - name: Setup CML
         uses: iterative/setup-cml@v1
@@ -27,8 +32,8 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Generating report"
-          cat metrics.txt >> report.md
-          echo "![](./plot.png)" >> report.md
+          cat metrics.json >> report.md
+          echo "![](./confusion_matrix.png)" >> report.md
 
           echo "Creating comment"
           cml comment create report.md
