@@ -11,14 +11,14 @@ jobs:
       - uses: iterative/setup-cml@v1
       - name: Train model
         env:
-          REPO_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
           python train.py
 
           echo "Generating report"
           cat metrics.txt >> report.md
-          echo "![](./plot.png)" >> report.md
+          # echo "![](./plot.png)" >> report.md
 
           echo "Creating comment"
           cml comment create report.md
