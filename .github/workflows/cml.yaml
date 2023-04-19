@@ -1,24 +1,33 @@
 name: model-training
 on: [push]
 jobs:
-  run:
+  train_and_publish_report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout 
+        uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
-      - uses: iterative/setup-cml@v1
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Train model
+        run: python train.py
+
+      - name: Setup CML
+        uses: iterative/setup-cml@v1
+      
+      - name: Create and publish CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install -r requirements.txt
-          python train.py
-
           echo "Generating report"
           cat metrics.txt >> report.md
-          # echo "![](./plot.png)" >> report.md
+          echo "![](./plot.png)" >> report.md
 
           echo "Creating comment"
           cml comment create report.md
