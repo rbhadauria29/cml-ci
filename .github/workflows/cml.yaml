@@ -27,12 +27,15 @@ jobs:
       - name: Setup CML
         uses: iterative/setup-cml@v1
       
-      - name: Create and publish CML report
+      - name: Create and publish metrics diff report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Fetching current state of repo"
+          git fetch --prune
           echo "Generating report"
-          cat metrics.json >> report.md
+          dvc metrics diff --show-md main >> report.md
+          # cat metrics.json >> report.md
           echo "![](./confusion_matrix.png)" >> report.md
 
           echo "Creating comment"
