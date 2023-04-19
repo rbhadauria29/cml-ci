@@ -1,0 +1,4 @@
+setuptools
+scikit-learn
+matplotlib
+pandas
