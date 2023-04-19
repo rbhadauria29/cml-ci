@@ -130,3 +130,4 @@ dmypy.json
 
 # ruff stuff
 .ruff_cache
+/raw_dataset
