@@ -18,8 +18,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Train model
-        run: python train.py
+      - name: Run DVC pipeline
+        run: dvc repro
 
       - name: Setup CML
         uses: iterative/setup-cml@v1
