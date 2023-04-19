@@ -1,0 +1,36 @@
+stages:
+  make_data:
+    cmd: python make_raw_dataset.py
+    deps:
+    - make_raw_dataset.py
+    outs:
+    - raw_dataset/train_features.csv
+    - raw_dataset/train_labels.csv
+    - raw_dataset/test_features.csv
+    - raw_dataset/test_labels.csv
+  preprocess_data:
+    cmd: python preprocess.py
+    deps:
+    - preprocess.py
+    - raw_dataset/train_features.csv
+    - raw_dataset/train_labels.csv
+    - raw_dataset/test_features.csv
+    - raw_dataset/test_labels.csv
+    outs:
+    - processed_dataset/train_features.csv
+    - processed_dataset/train_labels.csv
+    - processed_dataset/test_features.csv
+    - processed_dataset/test_labels.csv
+  train_model:
+    cmd: python train.py
+    deps:
+    - train.py
+    - processed_dataset/train_features.csv
+    - processed_dataset/train_labels.csv
+    - processed_dataset/test_features.csv
+    - processed_dataset/test_labels.csv
+    outs:
+    - confusion_matrix.png
+    metrics:
+    - metrics.json:
+        cache: false

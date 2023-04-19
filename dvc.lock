@@ -1,0 +1,77 @@
+schema: '2.0'
+stages:
+  make_data:
+    cmd: python make_raw_dataset.py
+    deps:
+    - path: make_raw_dataset.py
+      md5: 1f4580039c4aad135d207d6eecaae139
+      size: 993
+    outs:
+    - path: raw_dataset/test_features.csv
+      md5: 136ecad82989f5c9cfe1e1ba6934e8a8
+      size: 32007
+    - path: raw_dataset/test_labels.csv
+      md5: 5351fee20a64077fe4a7178c299c54b6
+      size: 512
+    - path: raw_dataset/train_features.csv
+      md5: 79fa84b39595718ba81b6d954a6db63c
+      size: 96042
+    - path: raw_dataset/train_labels.csv
+      md5: a7756150adacdaa68c6a9374c70d6b55
+      size: 1512
+  preprocess_data:
+    cmd: python preprocess.py
+    deps:
+    - path: preprocess.py
+      md5: 48f488f341303d04906c1f835cad94ca
+      size: 626
+    - path: raw_dataset/test_features.csv
+      md5: 136ecad82989f5c9cfe1e1ba6934e8a8
+      size: 32007
+    - path: raw_dataset/test_labels.csv
+      md5: 5351fee20a64077fe4a7178c299c54b6
+      size: 512
+    - path: raw_dataset/train_features.csv
+      md5: 79fa84b39595718ba81b6d954a6db63c
+      size: 96042
+    - path: raw_dataset/train_labels.csv
+      md5: a7756150adacdaa68c6a9374c70d6b55
+      size: 1512
+    outs:
+    - path: processed_dataset/test_features.csv
+      md5: 67bf8a3bd75795214b56a8b30a6c696f
+      size: 19580
+    - path: processed_dataset/test_labels.csv
+      md5: 5351fee20a64077fe4a7178c299c54b6
+      size: 512
+    - path: processed_dataset/train_features.csv
+      md5: 8804b9195f159ce78af19075b7523ae7
+      size: 58636
+    - path: processed_dataset/train_labels.csv
+      md5: a7756150adacdaa68c6a9374c70d6b55
+      size: 1512
+  train_model:
+    cmd: python train.py
+    deps:
+    - path: processed_dataset/test_features.csv
+      md5: 67bf8a3bd75795214b56a8b30a6c696f
+      size: 19580
+    - path: processed_dataset/test_labels.csv
+      md5: 5351fee20a64077fe4a7178c299c54b6
+      size: 512
+    - path: processed_dataset/train_features.csv
+      md5: 8804b9195f159ce78af19075b7523ae7
+      size: 58636
+    - path: processed_dataset/train_labels.csv
+      md5: a7756150adacdaa68c6a9374c70d6b55
+      size: 1512
+    - path: train.py
+      md5: fd46100b09211688e9f105231fb31838
+      size: 1172
+    outs:
+    - path: confusion_matrix.png
+      md5: 5db1470c03ccb36536439cdde72db256
+      size: 15107
+    - path: metrics.json
+      md5: b41e086c7d64b362eebb18d454fa74be
+      size: 19

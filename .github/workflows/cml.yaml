@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "Generating report"
           cat metrics.txt >> report.md
-          echo "![](./plot.png)" >> report.md
+          echo "![](./confusion_matrix.png)" >> report.md
 
           echo "Creating comment"
           cml comment create report.md
