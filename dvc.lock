@@ -70,11 +70,11 @@ stages:
       size: 1795
     outs:
     - path: confusion_matrix.png
-      md5: f98cf52290faa45a5881f49a1b4ebe8b
-      size: 17275
+      md5: abd5927c93f49433ea77610788ed0032
+      size: 17526
     - path: metrics.json
-      md5: ea5c398fcba48958cc8be8b55adc9a4c
+      md5: 5a1437091476a7918505df5c17f87726
       size: 114
     - path: predictions.csv
-      md5: a0adc83e26cfe7002a7473caef7b3def
+      md5: 9c244b6f0162d33a9a1e37dee950d07a
       size: 1027
