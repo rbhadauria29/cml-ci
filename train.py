@@ -59,7 +59,18 @@ with open("metrics.json", "w") as outfile:
     )
 
 # Plot it
-disp = ConfusionMatrixDisplay.from_estimator(
-    clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+disp = ConfusionMatrixDisplay.from_predictions(
+    y_test, y_pred, normalize="true", cmap=plt.cm.Blues
 )
 plt.savefig("confusion_matrix.png")
+
+
+header = "true_label,predicted_label"
+np.savetxt(
+    "predictions.csv",
+    np.column_stack([y_test, y_pred]),
+    delimiter=",",
+    header=header,
+    comments="",
+    fmt="%i",
+)
