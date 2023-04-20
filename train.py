@@ -1,7 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    precision_score,
+    recall_score,
+    f1_score,
+    accuracy_score,
+)
 import json
 
 
@@ -35,10 +41,22 @@ depth = 2
 clf = RandomForestClassifier(max_depth=depth)
 clf.fit(X_train, y_train)
 
-acc = clf.score(X_test, y_test)
-print(f"Accuracy:{acc}")
+y_pred = clf.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+print(f"Accuracy:{accuracy}, Precision: {precision}, Recall: {recall}, f1_score: {f1}")
 with open("metrics.json", "w") as outfile:
-    json.dump({"accuracy": acc}, outfile)
+    json.dump(
+        {
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "f1_score": f1,
+        },
+        outfile,
+    )
 
 # Plot it
 disp = ConfusionMatrixDisplay.from_estimator(

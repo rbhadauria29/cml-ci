@@ -31,11 +31,13 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Fetching current state of repo"
+
           git fetch --prune
           echo "Generating report"
+          echo "## Metrics" >> report.md
           dvc metrics diff --show-md main >> report.md
-          # cat metrics.json >> report.md
+          
+          echo "## Plots" >> report.md
           echo "![](./confusion_matrix.png)" >> report.md
 
           echo "Creating comment"
