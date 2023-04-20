@@ -38,7 +38,11 @@ jobs:
           dvc metrics diff --show-md main >> report.md
           
           echo "## Plots" >> report.md
-          echo "![](./confusion_matrix.png)" >> report.md
+          # echo "![](./confusion_matrix.png)" >> report.md
+          echo "### Class confusions" >> report.md
+          dvc plots diff --target predictions.csv --template confusion -x true_label -y predicted_label --show-vega main > vega.json
+          vl2png vega.json -s 1.5 > confusion_plot.png
+          echo "![](./confusion_plot.png)" >> report.md
 
           echo "Creating comment"
           cml comment create report.md
