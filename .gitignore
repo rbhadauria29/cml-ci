@@ -131,3 +131,4 @@ dmypy.json
 # ruff stuff
 .ruff_cache
 /confusion_matrix.png
+/predictions.csv

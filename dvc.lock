@@ -66,8 +66,8 @@ stages:
       md5: a7756150adacdaa68c6a9374c70d6b55
       size: 1512
     - path: train.py
-      md5: 6e88dbe7c1f6dd155b3cc752639fb0e8
-      size: 1613
+      md5: d4a7358dd4fe697704ee934a571ca9eb
+      size: 1795
     outs:
     - path: confusion_matrix.png
       md5: f98cf52290faa45a5881f49a1b4ebe8b
@@ -75,3 +75,6 @@ stages:
     - path: metrics.json
       md5: ea5c398fcba48958cc8be8b55adc9a4c
       size: 114
+    - path: predictions.csv
+      md5: a0adc83e26cfe7002a7473caef7b3def
+      size: 1027

@@ -34,3 +34,9 @@ stages:
     metrics:
     - metrics.json:
         cache: false
+    plots:
+    - predictions.csv:
+        template: confusion
+        x: true_label
+        y: predicted_label
+        title: Confusion matrix
