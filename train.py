@@ -11,6 +11,8 @@ from sklearn.metrics import (
 import json
 
 
+RFC_FOREST_DEPTH=5
+
 dtypes_features = [
     ("feature_1", "float"),
     ("feature_2", "float"),
@@ -37,8 +39,7 @@ X_test = np.loadtxt(
 y_test = np.loadtxt("processed_dataset/test_labels.csv", skiprows=1, delimiter=",")
 
 # Fit a model
-depth = 5
-clf = RandomForestClassifier(max_depth=depth)
+clf = RandomForestClassifier(max_depth=RFC_FOREST_DEPTH)
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)

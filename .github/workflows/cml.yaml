@@ -36,7 +36,7 @@ jobs:
           echo "Generating report"
           # echo "## Metrics" >> report.md
           # dvc metrics diff --show-md main >> report.md
-          dvc metrics show >> report.md
+          dvc metrics show --md >> report.md
           
           # echo "## Plots" >> report.md
           # echo "### Confusion matrix" >> report.md
