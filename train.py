@@ -37,7 +37,7 @@ X_test = np.loadtxt(
 y_test = np.loadtxt("processed_dataset/test_labels.csv", skiprows=1, delimiter=",")
 
 # Fit a model
-depth = 5
+depth = 2
 clf = RandomForestClassifier(max_depth=depth)
 clf.fit(X_train, y_train)
 

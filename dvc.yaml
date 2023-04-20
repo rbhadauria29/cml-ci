@@ -40,3 +40,4 @@ stages:
         x: true_label
         y: predicted_label
         title: Confusion matrix
+        cache: false
